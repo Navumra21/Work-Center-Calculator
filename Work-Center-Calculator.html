@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Work Zero Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: #fff; /* Changed background color to white */
+        }
+        h1 {
+            margin-top: 20px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .rectangle {
+            width: 300px;
+            height: 200px;
+            border: 2px solid #333;
+            margin: 0 auto;
+            position: relative;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+        .rectangle:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .label-x1, .label-x2, .label-y1, .label-y2 {
+            position: absolute;
+            color: #333;
+            font-size: 12px;
+        }
+        .label-x1 {
+            top: 50%;
+            left: -20px;
+            transform: translateY(-50%);
+        }
+        .label-x2 {
+            top: 50%;
+            right: -20px;
+            transform: translateY(-50%);
+        }
+        .label-y1 {
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .label-y2 {
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .center-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #333;
+            font-size: 24px;
+        }
+        .input-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .input-container label {
+            margin-right: 10px;
+            color: #333;
+        }
+        .input-container input {
+            width: 80px; /* Widened text fields */
+            padding: 5px;
+            border: 1px solid #333;
+            border-radius: 3px;
+            margin-right: 10px;
+            text-align: center;
+        }
+        .input-container button {
+            padding: 5px 10px;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .input-container button.calculate {
+            background-color: #007bff; /* Blue color for the calculate button */
+        }
+        .input-container button.reset {
+            background-color: #5e7cd5; /* Green color for the reset button */
+        }
+        .input-container button:hover {
+            filter: brightness(110%);
+        }
+        #centerX, #centerY {
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+        .footer {
+            margin-top: 50px;
+            color: #333;
+            font-size: 12px;
+        }
+    </style>
+    <script>
+        function calculate() {
+            var leftCoord = parseFloat(document.getElementById("leftCoord").value);
+            var rightCoord = parseFloat(document.getElementById("rightCoord").value);
+            var topCoord = parseFloat(document.getElementById("topCoord").value);
+            var bottomCoord = parseFloat(document.getElementById("bottomCoord").value);
+
+            var centerX = ((leftCoord + rightCoord) / 2).toFixed(4);
+            var centerY = ((topCoord + bottomCoord) / 2).toFixed(4);
+
+            document.getElementById("centerX").innerHTML = "X: <strong>" + centerX + "</strong>";
+            document.getElementById("centerY").innerHTML = "Y: <strong>" + centerY + "</strong>";
+        }
+
+        function reset() {
+            document.getElementById("leftCoord").value = "";
+            document.getElementById("rightCoord").value = "";
+            document.getElementById("topCoord").value = "";
+            document.getElementById("bottomCoord").value = "";
+            document.getElementById("centerX").innerHTML = "";
+            document.getElementById("centerY").innerHTML = "";
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('input[type=number]').forEach(function (input) {
+                input.addEventListener('keyup', function (e) {
+                    if (e.keyCode === 13) {
+                        calculate();
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Work Zero Calculator</h1>
+    <div class="rectangle">
+        <div class="label-x1">X1</div>
+        <div class="label-x2">X2</div>
+        <div class="label-y1">Y1</div>
+        <div class="label-y2">Y2</div>
+        <i class="fas fa-plus center-icon"></i>
+    </div>
+
+    <div class="input-container">
+        <label>X1: </label>
+        <input type="number" id="leftCoord">
+        <label>X2: </label>
+        <input type="number" id="rightCoord">
+        <label>Y1: </label>
+        <input type="number" id="topCoord">
+        <label>Y2: </label>
+        <input type="number" id="bottomCoord">
+        <button class="calculate" onclick="calculate()">Calculate</button>
+    </div>
+    <p id="centerX"></p>
+    <p id="centerY"></p>
+    <div class="input-container">
+        <button class="reset" onclick="reset()">Reset</button>
+    </div>
+
+    <div class="footer">
+        Made in Canada by Nav <i class="fas fa-heart"></i>
+    </div>
+</body>
+</html>
